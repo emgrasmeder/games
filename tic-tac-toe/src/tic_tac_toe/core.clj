@@ -18,17 +18,13 @@
 (defn make-move [old-matrix marker x y]
   (assoc old-matrix (keyword (reduce str [x y])) marker))
 
-(defn get-moves-in-row [r]
-  (for [i r]
-    (filter #(not (nil? %))
-            (map (fn [i] (if (nil? (nth r i))
-                           i
-                           nil))
-                 r))))
-
-(defn get-non-nil-kvp [k v]
- 
- )
+#_(defn get-moves-in-row [r]
+    (for [i r]
+      (filter #(not (nil? %))
+              (map (fn [i] (if (nil? (nth r i))
+                             i
+                             nil))
+                   r))))
 
 (defn get-moves [board]
   (keys (into {} (filter (comp nil? val) board))))

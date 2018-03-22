@@ -1,6 +1,7 @@
 tic-tac-tie/target
 /classes
 /checkouts
+*/target/*
 pom.xml
 pom.xml.asc
 *.jar
