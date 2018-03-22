@@ -1,63 +1,60 @@
 (ns tic-tac-toe.core
   (:gen-class))
 
-(def upper-left :00)
-(def upper-center :10)
-(def upper-right :20)
-(def center-left :01)
-(def center-center :11)
-(def center-right :21)
-(def bottom-left :02)
-(def bottom-center :12)
-(def bottom-right :22)
+(def upper-left 1)
+(def upper-center 2)
+(def upper-right 3)
+(def center-left 4)
+(def center-center 5)
+(def center-right 6)
+(def bottom-left 7)
+(def bottom-center 8)
+(def bottom-right 9)
 
-(def base-board {upper-left nil upper-center nil upper-right nil
-                 center-left nil center-center nil center-right nil
-                 bottom-left nil bottom-center nil bottom-right nil})
+(def base-board [nil nil nil
+                 nil nil nil
+                 nil nil nil])
 
-(defn make-move [old-matrix marker x y]
-  (assoc old-matrix (keyword (reduce str [x y])) marker))
-
-#_(defn get-moves-in-row [r]
-    (for [i r]
-      (filter #(not (nil? %))
-              (map (fn [i] (if (nil? (nth r i))
-                             i
-                             nil))
-                   r))))
+(defn make-move [old-matrix marker location]
+  (assoc old-matrix (-  location 1) marker))
 
 (defn get-moves [board]
-  (keys (into {} (filter (comp nil? val) board))))
+  (filter #(not (nil? %))
+          (map (fn [n i] (if (nil? n) (+ 1 i) nil))
+               board (range (count board)) )))
 
 (defn has-diagonal-winner? [board]
-  (or (= (upper-left board)
-         (center-center board)
-         (bottom-right board))
-      (= (upper-right board)
-         (center-center board)
-         (bottom-left board))))
+  (and (not (= base-board board))
+       (or (= (get board 1)
+              (get board 5)
+              (get board 9))
+           (= (get board 3)
+              (get board 5)
+              (get board 7)))))
 
 (defn has-horizontal-winner? [board]
-  (or (= (upper-left board)
-         (upper-center board)
-         (upper-right board))
-      (= (center-left board)
-         (center-center board)
-         (center-right board))
-      (= (bottom-left board)
-         (bottom-right board)
-         (bottom-right board))))
+  (and (not (= base-board board))
+       (or (= (get board 1)
+              (get board 2)
+              (get board 3))
+           (= (get board 4)
+              (get board 5)
+              (get board 6))
+           (= (get board 7)
+              (get board 8)
+              (get board 9))))  )
 
 (defn has-vertical-winner? [board]
-  (or (= (upper-left board)
-         (center-left board)
-         (bottom-left board))
-      (= (upper-center board)
-         (center-center board)
-         (bottom-center board))
-      (= (upper-right board)
-         (center-right board)
-         (bottom-right board))))
+  (and (not (= base-board board))
+       (or (= (get board 1)
+              (get board 4)
+              (get board 7))
+           (= (get board 2)
+              (get board 5)
+              (get board 8))
+           (= (get board 3)
+              (get board 6)
+              (get board 9)))))
 
 (defn has-winner? [board]
   (or (has-diagonal-winner? board)
