@@ -1,6 +1,11 @@
 (ns tic-tac-toe.core
   (:gen-class))
 
+(def ^:dynamic x-moves)
+(def ^:dynamic o-moves)
+(def ^:dynamic current-board)
+(def MAXMOVES "Maximum number of moves possible" 9)
+
 (def upper-left 1)
 (def upper-center 2)
 (def upper-right 3)

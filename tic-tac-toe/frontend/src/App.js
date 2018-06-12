@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import HorizontalHashComponent from './HorizontalHashComponent';
+import VerticalHashComponent from './VerticalHashComponent';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <div >
+        <div className="TicTacToe" >
+          Tic Tac Toe
+        </div >
+        <div >
+          <HorizontalHashComponent />
+          <HorizontalHashComponent />
+          <VerticalHashComponent />
+          <VerticalHashComponent />
+        </div >
+      </div >
     );
   }
 }
