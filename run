@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -eu -o pipefail
+
+if [ ! -z ${DEBUG+x} ]; then set -x;
+fi
+
+_test_all(){
+  cd tic-tac-toe/frontend/
+  CI=true yarn test
+  cd -
+}
+
+usage() {
+  echo "Usage: sh run test"
+}
+
+CMD=${1:-}
+ shift || true
+ case ${CMD} in
+   test) _test_all ;;
+   *) usage ;;
+ esac
