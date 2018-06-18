@@ -10,7 +10,7 @@ class App extends Component {
         <div className="TicTacToe" >
           Tic Tac Toe
         </div >
-        <div >
+        <div className={"hello world"}>
           <HorizontalHashComponent />
           <HorizontalHashComponent />
           <VerticalHashComponent />
